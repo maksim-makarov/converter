@@ -1,0 +1,34 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.rates {
+  display: flex;
+  justify-content: space-around;
+  align-self: center;
+  gap: 10px;
+}
+
+.rates p {
+  font-size: 24px;
+
+}
+
+.rate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border: 1px solid #dadce0;
+  border-radius: 10px;
+  justify-content: space-around;
+  gap: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+h3 {
+  font-size: 24px;
+}

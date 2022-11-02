@@ -1,0 +1,22 @@
+<div class="forms">
+  <div class="form from">
+    <label for="from">From</label>
+    <select id="from" name="from">
+      <option value="uah">UAH</option>
+      <option value="usd">USD</option>
+      <option value="eur">EUR</option>
+    </select>
+    <label for="fromAmount">Amount</label>
+    <input type="number" value="" id="fromAmount" placeholder="0" (input)="oninput($event)" />
+  </div>
+  <div class="form to">
+    <label for="to">To</label>
+    <select id="to" name="from">
+      <option value="uah">UAH</option>
+      <option value="usd">USD</option>
+      <option value="eur">EUR</option>
+    </select>
+    <label for="toAmount">Amount</label>
+    <input type="number" value="" id="toAmount" placeholder="0" />
+  </div>
+</div>

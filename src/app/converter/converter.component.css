@@ -1,0 +1,12 @@
+.forms {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-around;
+
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
