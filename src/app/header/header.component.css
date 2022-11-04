@@ -9,6 +9,7 @@
   justify-content: space-around;
   align-self: center;
   gap: 10px;
+  padding: 10px;
 }
 
 .rates p {
@@ -21,7 +22,7 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  border: 1px solid #dadce0;
+  border: 1px solid #c4c4c5;
   border-radius: 10px;
   justify-content: space-around;
   gap: 10px;

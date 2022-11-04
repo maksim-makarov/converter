@@ -8,12 +8,9 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
   constructor() {}
 
-  course: any[] = [];
-
   rateObj = {
     usd: 0,
     eur: 0,
-    date: '',
   };
 
   getRate() {
@@ -25,10 +22,8 @@ export class HeaderComponent implements OnInit {
   }
 
   showRate(obj: any) {
-    console.log('Rates updated');
     this.rateObj.usd = obj[25].rate;
     this.rateObj.eur = obj[32].rate;
-    this.rateObj.date = obj[25].exchangedate;
   }
 
   ngOnInit(): void {
