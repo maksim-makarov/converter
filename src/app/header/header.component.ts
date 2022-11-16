@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RatesService } from '../rates.service';
 
 @Component({
   selector: 'app-header',
@@ -6,28 +7,25 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  constructor() {}
+  constructor(private ratesService: RatesService) {}
 
-  rateObj = {
-    usd: 0,
-    eur: 0,
-  };
-
-  getRate() {
-    return fetch(
-      'https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json'
-    )
-      .then((response) => response.json())
-      .then((json) => this.showRate(json));
-  }
-
-  showRate(obj: any) {
-    this.rateObj.usd = obj[25].rate;
-    this.rateObj.eur = obj[32].rate;
-  }
+  rates: any;
+  newRates: any = [];
 
   ngOnInit(): void {
-    this.getRate();
-    setInterval(() => this.getRate(), 600000);
+    this.ratesService.getRates().subscribe((data) => {
+      this.rates = data;
+      console.log(this.rates);
+      this.rates.forEach((element: any) => {
+        if (element.cc == 'USD' || element.cc == 'EUR') {
+          delete element.r030;
+          delete element.txt;
+          delete element.exchangedate;
+          this.newRates.push(element);
+        }
+      });
+      // this.newNewRates.push({ rate: 1, cc: 'UAH' });
+      console.log(this.newRates);
+    });
   }
 }

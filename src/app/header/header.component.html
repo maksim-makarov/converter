@@ -1,10 +1,8 @@
 <div class="rates">
-  <div class="rate">
-    <h3>USD</h3>
-    <p>{{rateObj.usd}} UAH</p>
-  </div>
-  <div class="rate">
-    <h3>EUR</h3>
-    <p>{{rateObj.eur}} UAH</p>
+  <div *ngFor="let item of newRates" class="rate">
+    <div *ngIf="!(item.cc == 'UAH')">
+      <h3>{{item.cc}}</h3>
+      <p>{{item.rate}} UAH</p>
+    </div>
   </div>
 </div>
