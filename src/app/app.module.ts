@@ -6,7 +6,6 @@ import { HeaderComponent } from './header/header.component';
 import { ConverterComponent } from './converter/converter.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
 @NgModule({
   declarations: [AppComponent, HeaderComponent, ConverterComponent],
   imports: [BrowserModule, FormsModule, HttpClientModule],

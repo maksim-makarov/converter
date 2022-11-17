@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { from } from 'rxjs';
-import { HeaderComponent } from '../header/header.component';
+import { RatesService } from '../rates.service';
 
 @Component({
   selector: 'app-converter',
@@ -8,50 +7,47 @@ import { HeaderComponent } from '../header/header.component';
   styleUrls: ['./converter.component.css'],
 })
 export class ConverterComponent implements OnInit {
-  constructor() {}
+  constructor(private ratesService: RatesService) {}
 
   fromValue = 0;
   toValue = 0;
   ratio = 1;
 
-  fromCurrency: any = 'usd';
-  toCurrency: any = 'uah';
+  rates: any[] = [];
+
+  fromCurrency: any = 'USD';
+  toCurrency: any = 'UAH';
 
   directCalculate(): void {
     this.ratio =
-      this.rateObj[this.toCurrency] / this.rateObj[this.fromCurrency];
+      this.findRate(this.toCurrency) / this.findRate(this.fromCurrency);
     this.toValue = this.fromValue / this.ratio;
   }
 
   reverseCalculate() {
     this.ratio =
-      this.rateObj[this.toCurrency] / this.rateObj[this.fromCurrency];
+      this.findRate(this.toCurrency) / this.findRate(this.fromCurrency);
     this.fromValue = this.toValue * this.ratio;
   }
 
-  rateObj: any = {
-    usd: 0,
-    eur: 0,
-    uah: 1,
-  };
-
-  getRate() {
-    return fetch(
-      'https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json'
-    )
-      .then((response) => response.json())
-      .then((json) => this.showRate(json));
-  }
-
-  showRate(obj: any) {
-    console.log('Rates updated');
-    this.rateObj.usd = obj[25].rate;
-    this.rateObj.eur = obj[32].rate;
-    this.rateObj.date = obj[25].exchangedate;
+  findRate(title: string) {
+    for (const iterator of this.rates) {
+      if (iterator.title == title) return iterator.rate;
+    }
   }
 
   ngOnInit(): void {
-    this.getRate();
-    setInterval(() => this.getRate(), 600000);
+    this.ratesService.getRates().subscribe((data) => {
+      data.forEach((element: any) => {
+        if (
+          element.title == 'USD' ||
+          element.title == 'EUR' ||
+          element.title == 'GBP'
+        ) {
+          this.rates.push(element);
+        }
+      });
+      this.rates.push({ rate: 1, title: 'UAH' });
+    });
   }
 }

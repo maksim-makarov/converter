@@ -1,7 +1,7 @@
 <div class="rates">
-  <div *ngFor="let item of newRates" class="rate">
+  <div *ngFor="let item of rates" class="rate">
     <div *ngIf="!(item.cc == 'UAH')">
-      <h3>{{item.cc}}</h3>
+      <h3>{{item.title}}</h3>
       <p>{{item.rate}} UAH</p>
     </div>
   </div>

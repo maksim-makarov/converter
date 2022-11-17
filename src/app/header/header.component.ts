@@ -9,23 +9,19 @@ import { RatesService } from '../rates.service';
 export class HeaderComponent implements OnInit {
   constructor(private ratesService: RatesService) {}
 
-  rates: any;
-  newRates: any = [];
+  rates: any[] = [];
 
   ngOnInit(): void {
     this.ratesService.getRates().subscribe((data) => {
-      this.rates = data;
-      console.log(this.rates);
-      this.rates.forEach((element: any) => {
-        if (element.cc == 'USD' || element.cc == 'EUR') {
-          delete element.r030;
-          delete element.txt;
-          delete element.exchangedate;
-          this.newRates.push(element);
+      data.forEach((element: any) => {
+        if (
+          element.title == 'USD' ||
+          element.title == 'EUR' ||
+          element.title == 'GBP'
+        ) {
+          this.rates.push(element);
         }
       });
-      // this.newNewRates.push({ rate: 1, cc: 'UAH' });
-      console.log(this.newRates);
     });
   }
 }
