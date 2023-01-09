@@ -14,11 +14,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.ratesService.getRates().subscribe((data) => {
       data.forEach((element: any) => {
-        if (
-          element.title == 'USD' ||
-          element.title == 'EUR' ||
-          element.title == 'GBP'
-        ) {
+        if (element.title == 'USD' || element.title == 'EUR') {
           this.rates.push(element);
         }
       });
